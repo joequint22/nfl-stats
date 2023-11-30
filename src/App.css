@@ -1,0 +1,7 @@
+body, html, root{
+  all: unset;
+}
+
+body{
+  height: 100vh;
+}
