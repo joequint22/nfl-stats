@@ -30,7 +30,7 @@ export const ResultRow = ({
           ""
         ) : (
           <>
-            <div>Name</div>
+            <div>{cachedResults}</div>
             <div>Team</div>
             <div>Status</div>
           </>

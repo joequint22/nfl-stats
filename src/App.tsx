@@ -3,19 +3,41 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import UserInput from './components/userInput'
 import { ResultRow } from './components/ResultRow'
-import axios from 'axios'
 
 function App() {
   const [userInput, setUserInput] = useState('')
   const [cachedResults, setCachedResults] = useState([])
 
   useEffect(() => {
-       axios.get('https://ambeigj4hx.us.aircode.run/cachedValues')
-        .then(res => {
-          return setCachedResults(res.data)
-        })
-    
-  })
+    async function fetchCachedResults(){
+      try{
+       const res = await fetch("https://ambeigj4hx.us.aircode.run/cachedValues")
+       if(!res.ok){
+         throw new Response('Non 200 HTTP Status', res)
+       }
+       const data = await res.json()
+       setCachedResults(data)
+      }catch(err: any){
+        switch (err?.response.status){
+          case 400: break;
+          case 401: break;
+          case 404: break;
+          case 500: break;
+        }
+        handle(err)
+        throw(err)
+      }
+      return() => {
+
+      }
+
+    }
+
+    fetchCachedResults();
+
+
+  }, [])
+  console.log(cachedResults)
   return (
     <>
       <div className='h-screen text-white bg-gradient-radial from-[#2e4363] via-[#1e3258] to-[#111c33]'>
@@ -34,3 +56,7 @@ function App() {
 }
 
 export default App
+function handle(err: any) {
+  throw new Error('Function not implemented.')
+}
+
