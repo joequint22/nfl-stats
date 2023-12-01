@@ -5,7 +5,7 @@ export const Stats = () => {
   return (
     <div className='py-5'>
         <table className='w-full text-left'>
-            <thead className=''>
+            <thead className='text-white'>
                 <th>WEEK</th>
                 <th>OPP</th>
                 <th>REC</th>
